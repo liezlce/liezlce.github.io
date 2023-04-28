@@ -1,33 +1,52 @@
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
+import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/home';
 
-const app = express();
+function App() {
+  return (
+    <Router>
+      <div className='App'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
 
-// middleware
-app.use(cors());
-app.use(express.json());
+export default App;
 
-// connect to database
-mongoose.connect('<mongoDB URI>', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log('MongoDB database connection established successfully');
-});
+// const express = require('express');
+// const cors = require('cors');
+// const mongoose = require('mongoose');
 
-// routes
-const usersRouter = require('./routes/users');
-app.use('/users', usersRouter);
+// const app = express();
 
-const messagesRouter = require('./routes/messages');
-app.use('/messages', messagesRouter);
+// // middleware
+// app.use(cors());
+// app.use(express.json());
 
-// start server
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Server running on port: ${port}`);
-});
+// // connect to database
+// mongoose.connect('<mongoDB URI>', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
+// const connection = mongoose.connection;
+// connection.once('open', () => {
+//   console.log('MongoDB database connection established successfully');
+// });
+
+// // routes
+// const usersRouter = require('./routes/users');
+// app.use('/users', usersRouter);
+
+// const messagesRouter = require('./routes/messages');
+// app.use('/messages', messagesRouter);
+
+// // start server
+// const port = process.env.PORT || 5000;
+// app.listen(port, () => {
+//   console.log(`Server running on port: ${port}`);
+// });
