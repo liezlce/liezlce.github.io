@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Chat App</title>
+  <link rel="stylesheet" href="styles.css">
 	<style>
 		#chatlog {
 			height: 300px;
@@ -11,10 +12,51 @@
 	</style>
 </head>
 <body>
-	<h1>Chat App</h1>
-	<div id="chatlog"></div>
-	<input type="text" id="message">
-	<button id="send">Send</button>
+
+  <div class="container">
+
+    <div class="sidebar">
+      <button class="new-chat-button">New Chat</button>
+      <button class="settings-button">Settings</button>
+      <div class="search-container">
+        <input type="text" placeholder="Search...">
+        <button id="search-button">Search</button>
+      </div>
+      <ul class="chat-list">
+        <li class="active-chat"><a href="#">John Doe</a></li>
+        <li><a href="#">Jane Smith</a></li>
+        <li><a href="#">Bob Johnson</a></li>
+      </ul>
+    </div>
+
+    <div class="chat-window">
+      <div class="chat-header">
+        <h2>John Doe</h2>
+      </div>
+      <div class="chat-messages">
+        <div class="message">
+            <div class="message-text">
+              <p class="text-content">Hello!</p>
+            </div>
+            <div class="message-time">12:30 PM</div>
+          </div>
+          <div class="message">
+            <div class="message-text">How are you?</div>
+            <div class="message-time">12:31 PM</div>
+          </div>
+          <div class="message sent">
+            <div class="message-text">I'm good, thanks!</div>
+            <div class="message-time">12:32 PM</div>
+          </div>
+      </div>
+
+      <form id="chat-input">
+        <input type="text" placeholder="Type message...">
+        <button id="send-btn">Send</button>
+      </form>
+
+    </div>
+</div>
 
 	<script>
 		const chatlog = document.getElementById("chatlog");
