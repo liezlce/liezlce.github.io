@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const Home = ({ username, setUsername, room, setRoom, socket }) => {
   
     const navigate = useNavigate();
-    console.log("GOT TO HOME INDEX")
+    console.log("GO TO HOME INDEX")
     const joinRoom = () => {
         if (room !== '' && username !== '') {
             console.log(username, room)
@@ -15,10 +15,10 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
     return (
         <div className={styles.container}>
         <div className={styles.formContainer}>
-            <h1>{`<>DevRooms</>`}</h1>
+            <h1>{`QuickChat`}</h1>
             <input 
                 className={styles.input}
-                placeholder='Username...'
+                placeholder='Username'
                 onChange={(e) => setUsername(e.target.value)}
             />
 
@@ -27,10 +27,10 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
                 onChange={(e) => setRoom(e.target.value)}
             >
             <option>-- Select Room --</option>
-            <option value='javascript'>JavaScript</option>
-            <option value='node'>Node</option>
-            <option value='express'>Express</option>
-            <option value='react'>React</option>
+            <option value='Room 1'>Room 1</option>
+            <option value='Room 2'>Room 2</option>
+            <option value='Room 3'>Room 3</option>
+            <option value='Room 4'>Room 4</option>
             </select>
 
             <button 

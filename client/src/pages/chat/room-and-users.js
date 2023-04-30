@@ -1,3 +1,4 @@
+
 import styles from './styles.module.css';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -42,6 +43,8 @@ const RoomAndUsers = ({ socket, username, room }) => {
           ))}
         </ul>
       </div>
+
+      <button className='settings-btn'>Settings</button>
 
       <button className='btn btn-outline' onClick={leaveRoom}>
         Leave
