@@ -17,12 +17,12 @@ const SendMessage = ({ socket, username, room }) => {
     <div className={styles.sendMessageContainer}>
       <input
         className={styles.messageInput}
-        placeholder='Message...'
+        placeholder='Type message...'
         onChange={(e) => setMessage(e.target.value)}
         value={message}
       />
       <button className='btn btn-primary' onClick={sendMessage}>
-        Send Message
+        Send
       </button>
     </div>
   );

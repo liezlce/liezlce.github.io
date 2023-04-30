@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background: rgb(63, 73, 204);
+  background: #eee;
 }
 ::-webkit-scrollbar {
   width: 20px;
@@ -32,15 +32,36 @@ body {
   border: none;
 }
 .btn-outline {
-  color: rgb(153, 217, 234);
-  border: 1px solid rgb(153, 217, 234);
-  background: rgb(63, 73, 204);
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #a82327;
+  cursor: pointer;
 }
 .btn-primary {
-  background: rgb(153, 217, 234);
-  color: rgb(0, 24, 111);
-}
-.btn-secondary {
-  background: rgb(0, 24, 111);
+  padding: 10px;
+  background-color: #007bff;
   color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.settings-btn {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #28a745;
+  cursor: pointer;
 }
