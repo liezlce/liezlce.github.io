@@ -7,6 +7,7 @@ const Home = ({ username, setUsername, room, setRoom, socket }) => {
     console.log("GOT TO HOME INDEX")
     const joinRoom = () => {
         if (room !== '' && username !== '') {
+            console.log(username, room)
           socket.emit('join_room', { username, room });
         }
         navigate('/chat', { replace: true });
