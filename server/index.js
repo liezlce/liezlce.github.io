@@ -10,6 +10,7 @@ const { truncate } = require('fs');
 const mongoSaveMessage = require('./services/mongo-save-message');
 const mongoGetMessage = require('./services/mongo-get-message');
 const leaveRoom = require('./utils/leave-room');
+const gptGetMessage = require('./services/gpt-get-response');
 
 app.use(cors()); // Add cors middleware
 
@@ -71,6 +72,15 @@ io.on('connection', (socket) => {
       mongoSaveMessage(message, username, room, __createdtime__)
         .then((response) => console.log(response))
         .catch((err) => console.log(err));
+        if (message.length > 9 && message.slice(0, 9) == 'CHAT_BOT/') {
+          console.log(message);
+          var gptResponse = gptGetMessage(message.slice(9));
+          mongoSaveMessage(gptResponse, username, room, __createdtime__)
+          .then((response) => console.log(response))
+          .catch((err) => console.log(err));
+        }
+        
+      
     });
   });
   socket.on('leave_room', (data) => {
