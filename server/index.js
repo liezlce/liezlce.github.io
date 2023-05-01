@@ -1,21 +1,21 @@
 const express = require('express');
-const mongoose = require('mongoose');
+
 const app = express();
 const http = require('http');
 const cors = require('cors');
-const { Server } = require('socket.io'); // Add this
-const { truncate } = require('fs');
+const { Server } = require('socket.io'); 
+
 const mongoSaveMessage = require('./services/mongo-save-message');
 const mongoGetMessage = require('./services/mongo-get-message');
 const leaveRoom = require('./utils/leave-room');
 const {gptGetMessage} = require('./services/gpt-get-response');
 
-app.use(cors()); // Add cors middleware
+app.use(cors()); 
 
 
-const server = http.createServer(app); // Add this
+const server = http.createServer(app); 
 
-// Add this
+
 // Create an io server and allow for CORS from http://localhost:3000 with GET and POST methods
 const io = new Server(server, {
   cors: {

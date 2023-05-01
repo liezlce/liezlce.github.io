@@ -42,7 +42,6 @@ const Messages = ({ socket }) => {
       messagesColumnRef.current.scrollHeight;
   }, [messagesRecieved]);
 
-  // Add this
   function sortMessagesByDate(messages) {
     return messages.sort(
       (a, b) => parseInt(a.__createdtime__) - parseInt(b.__createdtime__)
