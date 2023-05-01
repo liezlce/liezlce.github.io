@@ -1,5 +1,6 @@
-require('dotenv').config();
-console.log(process.env.MONGODB_URL);
+// require('dotenv').config();
+// console.log(process.env.MONGODB_URL);
+
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
@@ -13,6 +14,7 @@ const leaveRoom = require('./utils/leave-room');
 const gptGetMessage = require('./services/gpt-get-response');
 
 app.use(cors()); // Add cors middleware
+
 
 const server = http.createServer(app); // Add this
 
@@ -66,21 +68,43 @@ io.on('connection', (socket) => {
     socket.to(room).emit('chatroom_users', chatRoomUsers);
     socket.emit('chatroom_users', chatRoomUsers);
 
-    socket.on('send_message', (data) => {
-      const { message, username, room, __createdtime__ } = data;
-      io.in(room).emit('receive_message', data); // Send to all users in room, including sender
-      mongoSaveMessage(message, username, room, __createdtime__)
-        .then((response) => console.log(response))
-        .catch((err) => console.log(err));
-        if (message.length > 9 && message.slice(0, 9) == 'CHAT_BOT/') {
-          console.log(message);
-          var gptResponse = gptGetMessage(message.slice(9));
-          mongoSaveMessage(gptResponse, username, room, __createdtime__)
-          .then((response) => console.log(response))
-          .catch((err) => console.log(err));
+    socket.on('send_message', async (data) => {
+      const { username, room, message, __createdtime__ } = data;
+
+      if (message.length > 9 && message.slice(0, 9) == 'CHAT_BOT/') {
+        try {
+          // generate response with gpt
+          let gptResponse = await gptGetMessage(message.slice(9));
+          
+          // save response to database
+          let response = await mongoSaveMessage(gptResponse, 'CHAT_BOT', room, __createdtime__);
+    
+          // send to all users in room, including sender
+          io.in(room).emit('receive_message', {
+            message: `CHAT_BOT: ${response.message}`,
+            username: 'CHAT_BOT',
+            room: response.room,
+            __createdtime__: response.__createdtime__,
+          });
+        } catch (error) {
+          console.log(error);
         }
-        
-      
+      } else {
+        try {
+          // save message to database
+          let response = await mongoSaveMessage(message, username, room, __createdtime__);
+    
+          // send to all users in room, including sender
+          io.in(room).emit('receive_message', {
+            message: response.message,
+            username: response.username,
+            room: response.room,
+            __createdtime__: response.__createdtime__,
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
     });
   });
   socket.on('leave_room', (data) => {
@@ -98,4 +122,4 @@ io.on('connection', (socket) => {
     console.log(`${username} has left the chat`);
   });
 });
-server.listen(4000, () => 'Server is running on port 3000');
+server.listen(4000, () => console.log('Server is running on port 4000'));

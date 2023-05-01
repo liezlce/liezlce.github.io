@@ -15,9 +15,22 @@ function App() {
   return (
     <Router>
       <div className='App'>
+        
         <Routes>
-          <Route
+        <Route
             path='/'
+            element={
+              <Home
+                username={username} 
+                setUsername={setUsername}
+                room={room} 
+                setRoom={setRoom} 
+                socket={socket} 
+              />
+            }
+          />
+          <Route
+            path='/home'
             element={
               <Home
                 username={username} 

@@ -1,6 +1,6 @@
 const got = require('got');
 
-const OPENAI_SECRET_KEY='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';
+const OPENAI_SECRET_KEY='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';
 
 async function gptGetMessage(message) {
   const url = 'https://api.openai.com/v1/engines/davinci/completions';
@@ -16,8 +16,8 @@ async function gptGetMessage(message) {
 
   try {
     const response = await got.post(url, { json: params, headers: headers }).json();
-    output = `${message}${response.choices[0].text}`;
-    console.log(output);
+    let output = `${message}${response.choices[0].text}`;
+    return output;
   } catch (err) {
     console.log(err);
   }

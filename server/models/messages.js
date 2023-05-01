@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const messagesSchema = new mongoose.Schema({
-  username: String,
   message: String,
+  username: String,
   room: String,
   timestamp: Date
 });
