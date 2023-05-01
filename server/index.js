@@ -1,6 +1,3 @@
-// require('dotenv').config();
-// console.log(process.env.MONGODB_URL);
-
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
@@ -11,7 +8,7 @@ const { truncate } = require('fs');
 const mongoSaveMessage = require('./services/mongo-save-message');
 const mongoGetMessage = require('./services/mongo-get-message');
 const leaveRoom = require('./utils/leave-room');
-const gptGetMessage = require('./services/gpt-get-response');
+const {gptGetMessage} = require('./services/gpt-get-response');
 
 app.use(cors()); // Add cors middleware
 
